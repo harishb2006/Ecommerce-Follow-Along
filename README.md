@@ -31,3 +31,7 @@ Authentication ensures only the right people can access certain features. For ex
 
     -Users need to log in to place orders or see their personal data.
     -It keeps the app secure by verifying users' identities.
+
+
+## Milestone 2: 
+I created a two files one is frontend and another backend , in frontend i have created cra in that login page i done , its navigate using react router I installed tailwind css for styling .
