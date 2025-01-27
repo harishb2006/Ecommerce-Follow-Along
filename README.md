@@ -35,3 +35,8 @@ Authentication ensures only the right people can access certain features. For ex
 
 ## Milestone 2: 
 I created a two files one is frontend and another backend , in frontend i have created cra in that login page i done , its navigate using react router I installed tailwind css for styling .
+
+
+## ## Milestone 3:
+
+Set up dedicated folders for organizing backend code effectively. Initialized and configured a Node.js server to handle API requests. Connected the application to MongoDB to store and manage data. Implemented basic error handling to ensure smooth server operation.
