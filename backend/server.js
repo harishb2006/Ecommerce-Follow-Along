@@ -7,7 +7,7 @@ process.on("uncaughtException", (err)=>{
 
 if(process.env.NODE_ENV !== "PRODUCTION"){
     require("dotenv").config({
-        path : "backend/config/.env",
+        path : "./config/.env",
     });
 };
 connectDatabase();
@@ -19,6 +19,7 @@ const server = app.listen(process.env.PORT, () =>{
 });
 process.on("unhandledRejection", (err) =>{
     console.error(`Unhandled Rejection: ${err.message}`);
+
     console.log("Shutting down the server due to unhandled promise rejection");
 
     server.close(()=> {
