@@ -168,3 +168,12 @@ We created a *My Products* page that displays a list of products created by the 
 - Integrated *Delete Product* functionality, enabling users to remove products permanently.
 - Added a *confirmation prompt* to prevent accidental deletions.
 - Ensured a smooth and secure product removal process.
+
+---
+## Milestone 15:
+- Implement a responsive navigation bar using React and Tailwind CSS to enable smooth navigation between different pages in the application.
+
+---
+## Milestone 16:
+- In this milestone, we create a product details page displaying all product data, including description, category, price, and tags, with quantity selection and an Add to Cart button. 🚀
+---
