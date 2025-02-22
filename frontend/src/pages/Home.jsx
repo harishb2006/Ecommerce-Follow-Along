@@ -28,7 +28,6 @@ export default function Home() {
   if (loading) {
     return <div className="text-center text-white mt-10">Loading products...</div>;
   }
-
   if (error) {
     return <div className="text-center text-red-500 mt-10">Error: {error}</div>;
   }

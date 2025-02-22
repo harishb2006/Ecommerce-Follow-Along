@@ -226,7 +226,7 @@ const CreateProduct = () => {
                         className="hidden"
                         multiple
                         onChange={handleImagesChange}
-                        required={!isEdit} //when creating a product this field is required
+                        required={!isEdit} 
                     />
                     <label htmlFor="upload" className="cursor-pointer">
                         <AiOutlinePlusCircle size={30} color="#555" />

@@ -7,7 +7,6 @@ const NavBar = () => {
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
-
     return (
         <nav className="bg-blue-600">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

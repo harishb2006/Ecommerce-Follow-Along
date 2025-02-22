@@ -9,8 +9,7 @@ export default function MyProduct() {
     const email = "harish1452006@gmail.com";
    
     console.log(email); 
-           
-
+        
 
     useEffect(() => {
         fetch(`http://localhost:8000/api/v2/product/my-products?email=${email}`)

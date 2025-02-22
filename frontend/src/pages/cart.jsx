@@ -7,7 +7,6 @@ const cart = () => {
     <div>
       
     </div>
-
     </>
   )
 }

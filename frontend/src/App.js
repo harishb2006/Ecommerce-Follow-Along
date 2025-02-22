@@ -6,7 +6,6 @@ import { LoginPage,SignupPage,Home ,CreateProduct,Cart,MyProducts} from './Route
 
 import "./App.css";
 
-
 const App = () => {
   return (
     <BrowserRouter>
