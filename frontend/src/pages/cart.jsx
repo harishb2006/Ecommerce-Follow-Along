@@ -5,7 +5,7 @@ const cart = () => {
     <>
     <Nav/>
     <div>
-      
+      cart
     </div>
     </>
   )
