@@ -188,3 +188,16 @@ In this milestone, we designed the cart schema to store product details in a use
 In this milestone, we created a **GET `/cart`** endpoint to fetch the user's cart details, including product information and total amount. The endpoint ensures that only authenticated users can access their cart and retrieves the cart data from the database.
 
 ---
+
+---
+## Milestone 19:
+In this milestone, we created a cart page to display the products in the user's cart. The page includes + and - buttons to adjust product quantities. We also implemented PUT /cart/update-quantity endpoints to update the product quantities in the cart, ensuring seamless communication between the frontend and backend.
+
+---
+
+---
+## Milestone 20:
+
+In this milestone, we created a GET /user/profile endpoint to fetch the user's profile details, including their name, email, profile photo, and addresses. Additionally, a functionality to send the user’s data via email was implemented. On the frontend, we created a profile page that displays the user’s profile photo, name, email in one section, and addresses in another. If no addresses are found, a "No address found" message is displayed, along with an "Add Address" button.
+
+---
