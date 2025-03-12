@@ -201,3 +201,16 @@ In this milestone, we created a cart page to display the products in the user's 
 In this milestone, we created a GET /user/profile endpoint to fetch the user's profile details, including their name, email, profile photo, and addresses. Additionally, a functionality to send the user’s data via email was implemented. On the frontend, we created a profile page that displays the user’s profile photo, name, email in one section, and addresses in another. If no addresses are found, a "No address found" message is displayed, along with an "Add Address" button.
 
 ---
+
+---
+### Milestone 21 Summary  
+We developed a **frontend form** to collect user addresses with fields like country, city, zip code, and address type. Users can navigate from their profile to this form via the **"Add Address"** button. Input values are managed using state, and required fields are validated before submission. Currently, the data is logged in the console, with future plans for backend integration and address editing.  
+
+---
+
+---
+
+### Milestone 22 Summary  
+We implemented a **POST /user/address** API to store addresses in the user profile. The backend validates and saves the submitted address data in the database. The frontend form is now integrated with this API, ensuring successful address storage. If no addresses exist, the profile page displays a **"No address found"** message with an option to add one. This milestone connects frontend address collection with backend storage for a seamless user experience.
+
+---
