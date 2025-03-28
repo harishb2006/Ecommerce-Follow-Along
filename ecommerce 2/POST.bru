@@ -1,0 +1,24 @@
+meta {
+  name: POST
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8000/api/v2/product/cart
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "userId": "harish.b.s76@kalvium.community",
+    "productId": "67a994762da37c698324a4e9",
+    "quantity": 2
+  }
+  
+}
