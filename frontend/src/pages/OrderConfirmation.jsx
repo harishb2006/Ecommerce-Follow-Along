@@ -288,7 +288,7 @@ const handlePlaceOrder = async (paymentType = 'cod', paypalOrderData = null) => 
                             <div className='mt-4' style={{ maxWidth: '500px' }}>
                                 <PayPalScriptProvider
                                     options={{
-                                        'client-id': 'AUo8jmR_MT64Bjv7gqpoPqJMWMwnHn6CDBW0z5TLA90uBaH_sigUveZ9pkp8fDtB0YMI7uz1tA1e5Rrs', 
+                                        'client-id': 'AZ451bFRyRy_IRjQHhxD8qxk_chTMawRVylhdC5zl5lhD1foIqDlS6IaWh-wtVivVgXcOagn-mOXxraa', 
                                     }}
                                 >
                                     <PayPalButtons
