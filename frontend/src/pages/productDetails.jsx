@@ -5,7 +5,7 @@ import axios from "axios";
 import Nav from "../components/navbar";
 import { IoIosAdd } from "react-icons/io";
 import { IoIosRemove } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux"; 
 
 export default function ProductDetails() {
 	const { id } = useParams();
@@ -13,18 +13,17 @@ export default function ProductDetails() {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [quantity, setQuantity] = useState(1);
-	const email = "harish.b.s76@kalvium.community"
-
-	const navigate = useNavigate();
-
+    // const email="jananisibi2002@gmail.com";
+   // Get email from Redux state
+	const email = useSelector((state) => state.user.email);
 	useEffect(() => {
 		const fetchProduct = async () => {
 			try {
 				const response = await axios.get(
-					`http://localhost:8000/api/v2/product/product/${id}`
+					`http://localhost:5000/api/v2/product/product/${id}`
 				);
 				console.log("Fetched product:", response.data.product);
-				setProduct(response.data.product); 
+				setProduct(response.data.product); // Ensure correct state setting
 				setLoading(false);
 			} catch (err) {
 				console.error("Error fetching product:", err);
@@ -36,6 +35,7 @@ export default function ProductDetails() {
 		fetchProduct();
 	}, [id]);
 
+	// Log the updated product state whenever it changes
 	useEffect(() => {
 		if (product !== null) {
 			console.log("Updated product state:", product);
@@ -43,10 +43,12 @@ export default function ProductDetails() {
 		}
 	}, [product]);
 
+	// 2. Handler to increment quantity
 	const handleIncrement = () => {
 		setQuantity((prevQuantity) => prevQuantity + 1);
 	};
 
+	// 3. Handler to decrement quantity, ensuring it doesn't go below 1
 	const handleDecrement = () => {
 		setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
 	};
@@ -54,7 +56,7 @@ export default function ProductDetails() {
 	const addtocart = async () => {
 		try {
 			const response = await axios.post(
-				"http://localhost:8000/api/v2/product/cart",
+				"http://localhost:5000/api/v2/product/cart",
 				{
 					userId: email,
 					productId: id,
@@ -62,12 +64,10 @@ export default function ProductDetails() {
 				}
 			);
 			console.log("Added to cart:", response.data);
-			navigate("/cart");
 		} catch (err) {
 			console.error("Error adding to cart:", err);
 		}
 	};
-
 
 	if (loading) {
 		return (
@@ -105,7 +105,7 @@ export default function ProductDetails() {
 						<div className="w-full bsm:w-2/3 md:w-1/3 rounded-lg">
 							{product.images && product.images.length > 0 ? (
 								<img
-									src={`http://localhost:8000${product.images[0]}`}
+									src={`http://localhost:5000${product.images[0]}`}
 									alt={product.name}
 									className="w-full h-full object-contain bsm:object-cover"
 									style={{ maxHeight: "500px" }} // Adjust the max height as needed

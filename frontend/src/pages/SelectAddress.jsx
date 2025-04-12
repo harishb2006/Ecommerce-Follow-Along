@@ -1,7 +1,9 @@
 // SelectAddress.jsx
 import React, { useState, useEffect } from 'react';
-import Nav from '../components/navbar'; 
+import axios from 'axios';
+import Nav from '../components/navbar'; // Ensure correct casing
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'; 
 
 const SelectAddress = () => {
     const [addresses, setAddresses] = useState([]);
@@ -9,15 +11,19 @@ const SelectAddress = () => {
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
-    const userEmail = 'harish.b.s76@kalvium.community'; 
 
+    // const userEmail = 'jananisibi2002@gmail.com';
+    const userEmail = useSelector((state) => state.user.email);
 
     useEffect(() => {
+        if (!userEmail) return;
         const fetchAddresses = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/api/v2/user/addresses?email=${encodeURIComponent(userEmail)}`);
+                const response = await axios.get('http://localhost:5000/api/v2/user/addresses', {
+                    params: { email: userEmail },
+                });
 
-                if (!response.ok) {
+                if (response.status !== 200) {
                     if (response.status === 404) {
                         throw new Error('User not found.');
                     } else if (response.status === 400) {
@@ -27,7 +33,7 @@ const SelectAddress = () => {
                     }
                 }
 
-                const data = await response.json();
+                const data = response.data;
 
                 if (data && Array.isArray(data.addresses)) {
                     setAddresses(data.addresses);
@@ -37,7 +43,7 @@ const SelectAddress = () => {
                 }
             } catch (err) {
                 console.error('Error fetching addresses:', err);
-                setError(err.message || 'An unexpected error occurred.');
+                setError(err.response?.data?.message || err.message || 'An unexpected error occurred.');
             } finally {
                 setLoading(false);
             }
@@ -47,17 +53,20 @@ const SelectAddress = () => {
     }, [userEmail]);
 
     const handleSelectAddress = (addressId) => {
+        // Navigate to Order Confirmation with the selected address ID and email
         navigate('/order-confirmation', { state: { addressId, email: userEmail } });
     };
 
+    // Render loading state
     if (loading) {
         return (
             <div className='w-full h-screen flex justify-center items-center'>
                 <p className='text-lg'>Loading addresses...</p>
             </div>
         );
-    }
+    } 
 
+    // Render error state
     if (error) {
         return (
             <div className='w-full h-screen flex flex-col justify-center items-center'>

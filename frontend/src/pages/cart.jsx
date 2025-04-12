@@ -1,15 +1,19 @@
 import CartProduct from '../components/CartProduct';
 import Nav from '../components/navbar';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'; 
 
 const Cart = () => {
 
     const [products, setProducts] = useState([]);
-    const navigate = useNavigate(); 
-
+    const navigate=useNavigate();
+    //  Get the email from Redux state
+  const email = useSelector((state) => state.user.email);
     useEffect(() => {
-        fetch(`http://localhost:8000/api/v2/product/cartproducts?email=${'harish.b.s76@kalvium.community'}`)
+      if (!email) return;
+
+        fetch(`http://localhost:5000/api/v2/product/cartproducts?email=${'email'}`)
           .then((res) => {
             if (!res.ok) {
               throw new Error(`HTTP error! status: ${res.status}`);
@@ -20,35 +24,17 @@ const Cart = () => {
             setProducts(data.cart.map(product => ({quantity: product['quantity'], ...product['productId']})));
             console.log("Products fetched:", data.cart);
           })
-
-          // {
-          //   "quantity": 2,
-          //   "productId": {
-          //     "_id": "123",
-          //     "name": "Laptop",   //product.productId.name
-          //     "price": 50000
-          //   }
-          // }
-
-          // into:
-
-          // {
-          //   "quantity": 2,
-          //   "_id": "123",
-          //   "name": "Laptop",   //product.name
-          //   "price": 50000
-          // }
-          
           .catch((err) => {
             console.error(" Error fetching products:", err);
           });
-      }, []);
+      }, [email]);
     
       console.log("Products:", products);
       
-      const handlePlaceOrder = () => {
-        navigate('/select-address');
-      };
+
+      const handlePlaceOrder =()=>{
+        navigate('/select-address')
+      }
 
     return (
         <div className='w-full h-screen'>
@@ -66,13 +52,12 @@ const Cart = () => {
                         }
                     </div>
                     <div className='w-full p-4 flex justify-end'>
-                        <button
-                          onClick={handlePlaceOrder}
-                          className='bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600'
-                        >
-                          Place Order
-                        </button>
-                    </div>
+                    <button
+                    onClick={handlePlaceOrder}
+                    className='bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600'>
+                   Place Order
+                  </button>
+                  </div>
                 </div>
             </div>
         </div>

@@ -3,7 +3,6 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import Nav from "../components/navbar";
-
 const CreateProduct = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -27,9 +26,10 @@ const CreateProduct = () => {
     ];
 
     useEffect(() => {
+        console.log("Productid: " ,id)
         if (isEdit) {
             axios
-                .get(`http://localhost:8000/api/v2/product/product/${id}`)
+                .get(`http://localhost:5000/api/v2/product/product/${id}`)
                 .then((response) => {
                     const p = response.data.product;
                     setName(p.name);
@@ -41,7 +41,7 @@ const CreateProduct = () => {
                     setEmail(p.email);
                     if (p.images && p.images.length > 0) {
                         setPreviewImages(
-                            p.images.map((imgPath) => `http://localhost:8000${imgPath}`)
+                            p.images.map((imgPath) => `http://localhost:5000${imgPath}`)
                         );
                     }
                 })
@@ -76,7 +76,7 @@ const CreateProduct = () => {
         try {
             if (isEdit) {
                 const response = await axios.put(
-                    `http://localhost:8000/api/v2/product/update-product/${id}`,
+                    `http://localhost:5000/api/v2/product/update-product/${id}`,
                     formData,
                     {
                         headers: { "Content-Type": "multipart/form-data" },
@@ -84,11 +84,11 @@ const CreateProduct = () => {
                 );
                 if (response.status === 200) {
                     alert("Product updated successfully!");
-                    navigate("/my-products");
+                    navigate("/myproducts");
                 }
             } else {
                 const response = await axios.post(
-                    "http://localhost:8000/api/v2/product/create-product",
+                    "http://localhost:5000/api/v2/product/create-product",
                     formData,
                     {
                         headers: { "Content-Type": "multipart/form-data" },
@@ -104,7 +104,8 @@ const CreateProduct = () => {
                     setTags("");
                     setPrice("");
                     setStock("");
-                    setEmail("");}
+                    setEmail("");
+                }
             }
         } catch (err) {
             console.error("Error creating/updating product:", err);
@@ -113,8 +114,8 @@ const CreateProduct = () => {
     };
 
     return (
-        <>
-        <Nav/>
+        <> 
+        <Nav />
         <div className="w-[90%] max-w-[500px] bg-white shadow h-auto rounded-[4px] p-4 mx-auto">
             <h5 className="text-[24px] font-semibold text-center">
                 {isEdit ? "Edit Product" : "Create Product"}
@@ -225,7 +226,7 @@ const CreateProduct = () => {
                         className="hidden"
                         multiple
                         onChange={handleImagesChange}
-                        required={!isEdit} //when creating a product this field is required
+                        required={!isEdit}
                     />
                     <label htmlFor="upload" className="cursor-pointer">
                         <AiOutlinePlusCircle size={30} color="#555" />
@@ -250,7 +251,6 @@ const CreateProduct = () => {
             </form>
         </div>
         </>
-
     );
 };
 

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom"
 import AddressCard from "../components/AddressCard";
-import NavBar from "../components/navbar";
+import { useNavigate } from "react-router-dom";
+import Nav from "../components/navbar";
+import { useSelector } from "react-redux";
 
 export default function Profile() {
-	const navigate =useNavigate();
+	const email = useSelector((state) => state.user.email);
+
 	const [personalDetails, setPersonalDetails] = useState({
 		name: "",
 		email: "",
@@ -13,13 +15,18 @@ export default function Profile() {
 	});
 
 	const [addresses, setAddresses] = useState([]);
-
-
+	const navigate=useNavigate()
+	
 	useEffect(() => {
+		if (!email) return;
+
 		fetch(
-			`http://localhost:8000/api/v2/user/profile?email=${"harish.b.s76@kalvium.community"}`,
+			`http://localhost:5000/api/v2/user/profile?email=${"email"}`,
 			{
 				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
 			}
 		)
 			.then((res) => {
@@ -34,14 +41,14 @@ export default function Profile() {
 				console.log("User fetched:", data.user);
 				console.log("Addresses fetched:", data.addresses);
 			});
-	}, []);
+	}, [email]);
+	const handleAddAddress = () => {
+		navigate("/create-address");
+	};
 
-	const handleAddAddress=()=>{
-		navigate('/create-address')
-	}
 	return (
 		<>
-			<NavBar />
+			<Nav />
 			<div className="w-full min-h-screen bg-neutral-800 p-5">
 				<div className="w-full h-full bg-neutral-700 rounded-lg">
 					<div className="w-full h-max my-2 p-5">
@@ -56,10 +63,13 @@ export default function Profile() {
 									PICTURE
 								</div>
 								<img
-									src={`http://localhost:8000/${personalDetails.avatarUrl}`}
+									src={`http://localhost:5000/${personalDetails.avatarUrl}` || `https://cdn.vectorstock.com/i/500p/17/61/male-avatar-profile-picture-vector-10211761.jpg`}
 									alt="profile"
 									className="w-40 h-40 rounded-full"
-									
+									onError={(e) => {
+										e.target.onerror = null; // Prevents infinite loop if the default image also fails
+										e.target.src = `https://cdn.vectorstock.com/i/500p/17/61/male-avatar-profile-picture-vector-10211761.jpg`;
+									}}
 								/>
 							</div>
 							<div className="h-max md:flex-grow">
@@ -99,9 +109,7 @@ export default function Profile() {
 							</h1>
 						</div>
 						<div className="w-full h-max p-5">
-							<button className="w-max px-3 py-2 bg-neutral-600 text-neutral-100 rounded-md text-center hover:bg-neutral-100 hover:text-black transition-all duration-100"
-							 onClick={handleAddAddress}
-							>
+							<button className="w-max px-3 py-2 bg-neutral-600 text-neutral-100 rounded-md text-center hover:bg-neutral-100 hover:text-black transition-all duration-100" onClick={handleAddAddress}>
 								Add Address
 							</button>
 						</div>
