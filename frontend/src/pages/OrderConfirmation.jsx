@@ -42,7 +42,7 @@ const OrderConfirmation = () => {
                   price: item.productId.price,
                   image: item.productId.images.map(
                     (imagePath) =>
-                      `https://ecommerce-online-store-back.onrender.com/${imagePath}`
+                      `https://ecommerce-follow-along-rljg.onrender.com/${imagePath}`
                   ),
                   quantity: item.quantity,
                 }));

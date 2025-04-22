@@ -187,6 +187,6 @@ In Milestone 35, we deployed both the backend and frontend of the application. T
 **Frontend URL:** https://ecommerce-online-store-front.onrender.com  
 
 This link replaced all instances of `localhost` in the frontend code to enable proper API communication. After that, the frontend was deployed using a deployment platform and is available at:  
-**Backend URL:** https://ecommerce-online-store-back.onrender.com 
+**Backend URL:** https://ecommerce-follow-along-rljg.onrender.com 
 
 Finally, we tested both deployments to ensure they are working correctly together in the production environment, confirming successful integration and functionality.

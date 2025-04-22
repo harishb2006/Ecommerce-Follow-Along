@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddressCard from "../components/auth/AddressCard";
 import NavBar from "../components/auth/nav";
 import { useSelector } from "react-redux"; 
 import axios from "../axiosConfig";
 // import axios from 'axios';
-// axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = true;
 
 export default function Profile() {
 	const email = useSelector((state) => state.user.email);
@@ -71,7 +71,7 @@ export default function Profile() {
                 <img
                   src={
                     personalDetails.avatarUrl
-                      ? `https://ecommerce-online-store-back.onrender.com/${personalDetails.avatarUrl}`
+                      ? `https://ecommerce-follow-along-rljg.onrender.com/${personalDetails.avatarUrl}`
                       : `https://cdn.vectorstock.com/i/500p/17/61/male-avatar-profile-picture-vector-10211761.jpg`
                   }
                   alt="profile"
