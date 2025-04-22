@@ -71,7 +71,7 @@ router.post(
     // Generate JWT token
     const token = jwt.sign(
       { id: user._id, email: user.email },
-      process.env.JWT_SECRET || "your_jwt_secret",
+      process.env.JWT_SECRET || "randomtoken1234567890",
       { expiresIn: "1h" }
   );
 
